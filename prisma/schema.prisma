@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model product {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  name        String
+  description String
+  price       Float
+}
+
+model user {
+  id                   String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime
+  name                 String
+  email                String        @unique
+  password             String
+  isActive             Boolean       @default(true)
+  isVerified           Boolean       @default(false)
+  passwordChangedAt    DateTime?
+  passwordResetExpires DateTime?
+  passwordResetToken   Int?
+  verifyKey            Int?
+  verifyKeyExpires     DateTime?
+  phoneNumber          String?       @unique
+  role                 roles         @default(user)
+  authProvider         authProviders @default(credentials)
+  status               status        @default(active)
+}
+
+enum authProviders {
+  google
+  credentials
+  apple
+  facebook
+}
+
+enum roles {
+  user
+  admin
+}
+
+enum status {
+  active
+  blocked
+}
