@@ -14,7 +14,7 @@ export default function Home() {
             <Sidebar />
             <div className="flex-grow">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-4">
                   <h1 className="text-3xl font-semibold">Recommended jobs</h1>
                   <div className="border border-border px-3 font-medium py-1 rounded-full">
                     386
