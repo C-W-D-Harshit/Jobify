@@ -40,52 +40,40 @@ export default function FilterComp({}: FilterCompProps): JSX.Element {
   >([]);
 
   const handleWorkingScheduleChange = (value: string) => {
-    setSelectedWorkingSchedules((prevSelected) =>
-      prevSelected.includes(value)
+    setSelectedWorkingSchedules((prevSelected) => {
+      const updatedSelection = prevSelected.includes(value)
         ? prevSelected.filter((schedule) => schedule !== value)
-        : [...prevSelected, value]
-    );
+        : [...prevSelected, value];
+
+      const queryParams = new URLSearchParams();
+      queryParams.set("workingSchedule", arrayToString(updatedSelection));
+
+      const newQuery = queryParams.toString();
+      const currentPath = pathname;
+      const newPath = `${currentPath}${newQuery ? `?${newQuery}` : ""}`;
+      router.push(newPath);
+
+      return updatedSelection;
+    });
   };
 
   const handleEmploymentTypeChange = (value: string) => {
-    setSelectedEmploymentTypes((prevSelected) =>
-      prevSelected.includes(value)
+    setSelectedEmploymentTypes((prevSelected) => {
+      const updatedSelection = prevSelected.includes(value)
         ? prevSelected.filter((type) => type !== value)
-        : [...prevSelected, value]
-    );
+        : [...prevSelected, value];
+
+      const queryParams = new URLSearchParams();
+      queryParams.set("employmentType", arrayToString(updatedSelection));
+
+      const newQuery = queryParams.toString();
+      const currentPath = pathname;
+      const newPath = `${currentPath}${newQuery ? `?${newQuery}` : ""}`;
+      router.push(newPath);
+
+      return updatedSelection;
+    });
   };
-
-  // Listen for changes in search parameters and update state accordingly
-  useEffect(() => {
-    const workingSchedules =
-      searchParams.get("workingSchedule")?.split(",") ?? [];
-    const employmentTypes =
-      searchParams.get("employmentType")?.split(",") ?? [];
-
-    setSelectedWorkingSchedules(workingSchedules);
-    setSelectedEmploymentTypes(employmentTypes);
-  }, [searchParams]);
-
-  // Apply filters and update URL
-  // useEffect(() => {
-  //   const queryParams = new URLSearchParams();
-
-  //   if (selectedWorkingSchedules.length > 0) {
-  //     queryParams.set(
-  //       "workingSchedule",
-  //       arrayToString(selectedWorkingSchedules)
-  //     );
-  //   }
-  //   if (selectedEmploymentTypes.length > 0) {
-  //     queryParams.set("employmentType", arrayToString(selectedEmploymentTypes));
-  //   }
-
-  //   const newQuery = queryParams.toString();
-  //   const currentPath = pathname;
-  //   const newPath = `${currentPath}${newQuery ? `?${newQuery}` : ""}`;
-
-  //   router.push(newPath);
-  // }, [selectedWorkingSchedules, selectedEmploymentTypes, router, pathname]);
 
   return (
     <div className="border-r">

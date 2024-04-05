@@ -5,7 +5,7 @@ import { signUpSchema } from "@/schema/authSchema";
 import SessionChecker from "@/lib/session/SessionChecker";
 import { resend } from "@/utils/resend";
 import NewArrivalEmailTemplate from "@/components/templates/email/NewArrivalEmailTemplate";
-import twilio from "twilio";
+// import twilio from "twilio";
 
 function generateOTP() {
   const otpLength = 6;
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
 
     const accountSid = <string>process.env.TWILIO_ACCOUNT_SID;
     const token = <string>process.env.TWILIO_AUTH_TOKEN;
-    const client = twilio(accountSid, token);
+    // const client = twilio(accountSid, token);
 
     try {
       const response = signUpSchema.parse(body);
@@ -87,11 +87,11 @@ export async function POST(req: NextRequest) {
     var nameParts: any = user.name.split(" ");
     const firstName: string = nameParts[0];
     const otp = user.verifyKey as number;
-    client.messages.create({
-      body: `Welcome to Homely Bites! Your OTP is ${otp}`,
-      from: "+14245431396",
-      to: "+919818525635",
-    });
+    // client.messages.create({
+    //   body: `Welcome to Homely Bites! Your OTP is ${otp}`,
+    //   from: "+14245431396",
+    //   to: "+919818525635",
+    // });
     const { data, error } = await resend.emails.send({
       from: "Homely Bites <hello@homelybites.store>",
       to: [user.email],

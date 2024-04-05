@@ -6,14 +6,16 @@ import SortByComp from "./SortBy";
 import JobCard from "@/components/card/JobCard";
 import JobHolder from "@/components/holders/JobHolder";
 import { Suspense } from "react";
+import { getJobs } from "@/actions/jobActions";
 
-export default function Home({
+export default async function Home({
   params,
   searchParams,
 }: {
   params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
+  const jobs = await getJobs();
   return (
     <main>
       <SearchComp />
@@ -26,7 +28,7 @@ export default function Home({
                 <div className="flex items-center gap-4">
                   <h1 className="text-3xl font-semibold">Recommended jobs</h1>
                   <div className="border border-border px-3 font-medium py-1 rounded-full">
-                    386
+                    {jobs?.length}
                   </div>
                 </div>
                 <SortByComp />

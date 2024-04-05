@@ -63,6 +63,6 @@ export const config = {
     "/account/:path*",
     "/admin/:path*",
     "/checkout/:path*",
-    "/hiring/:path*",
+    "/upload-job/:path*",
   ],
 };

@@ -26,7 +26,6 @@ import { FcGoogle } from "react-icons/fc";
 import MaxWidthWrapper from "@/components/wrappers/MaxWidthWrapper";
 import { signUpSchema } from "@/schema/authSchema";
 import axios from "axios";
-import { saveTokenToDB } from "@/actions/onboardingAction";
 
 const formSchema = z.object({
   email: z.string().min(2, {
@@ -68,7 +67,7 @@ export default function SignUpForm() {
       // // Save the FCM token to the database
       // fcmToken && (await saveTokenToDB(fcmToken));
       // toast.success(fcmToken);
-      router.push("/onboarding");
+      router.push("/");
     }
     return result;
   };

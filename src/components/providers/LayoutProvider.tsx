@@ -22,7 +22,7 @@ export default function LayoutProvider({
   }
   return (
     <>
-      {session?.user.verified === false && <VerifyBar session={session} />}
+      {/* {session?.user.verified === false && <VerifyBar session={session} />} */}
       <Header />
       <div className="">{children}</div>
       {/* <div className="w-full h-20 bg-gradient-to-b from-transparent to-white fixed bottom-0 left-0" /> */}
