@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma/prisma";
 
 export async function getJobs(
   filters: any = {},
-  sortBy: any,
+  sortBy?: any,
   orderBy: any = {}
 ) {
   try {
@@ -62,5 +62,22 @@ export async function getJobs(
     return jobs;
   } catch (error: any) {
     throw new Error(`Error fetching jobs: ${error.message}`);
+  }
+}
+
+export async function getJobById(id: string) {
+  try {
+    const job = await prisma.job.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        company: true,
+      },
+    });
+
+    return job;
+  } catch (error: any) {
+    throw new Error(`Error fetching job: ${error.message}`);
   }
 }

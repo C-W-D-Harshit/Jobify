@@ -67,25 +67,25 @@ export default function FilterComp({}: FilterCompProps): JSX.Element {
   }, [searchParams]);
 
   // Apply filters and update URL
-  useEffect(() => {
-    const queryParams = new URLSearchParams();
+  // useEffect(() => {
+  //   const queryParams = new URLSearchParams();
 
-    if (selectedWorkingSchedules.length > 0) {
-      queryParams.set(
-        "workingSchedule",
-        arrayToString(selectedWorkingSchedules)
-      );
-    }
-    if (selectedEmploymentTypes.length > 0) {
-      queryParams.set("employmentType", arrayToString(selectedEmploymentTypes));
-    }
+  //   if (selectedWorkingSchedules.length > 0) {
+  //     queryParams.set(
+  //       "workingSchedule",
+  //       arrayToString(selectedWorkingSchedules)
+  //     );
+  //   }
+  //   if (selectedEmploymentTypes.length > 0) {
+  //     queryParams.set("employmentType", arrayToString(selectedEmploymentTypes));
+  //   }
 
-    const newQuery = queryParams.toString();
-    const currentPath = pathname;
-    const newPath = `${currentPath}${newQuery ? `?${newQuery}` : ""}`;
+  //   const newQuery = queryParams.toString();
+  //   const currentPath = pathname;
+  //   const newPath = `${currentPath}${newQuery ? `?${newQuery}` : ""}`;
 
-    router.push(newPath);
-  }, [selectedWorkingSchedules, selectedEmploymentTypes, router, pathname]);
+  //   router.push(newPath);
+  // }, [selectedWorkingSchedules, selectedEmploymentTypes, router, pathname]);
 
   return (
     <div className="border-r">

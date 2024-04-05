@@ -11,8 +11,8 @@ const menuItems = [
     href: "/messages",
   },
   {
-    label: "Hiring",
-    href: "/hiring",
+    label: "Upload Job",
+    href: "/upload-job",
   },
   {
     label: "Community",

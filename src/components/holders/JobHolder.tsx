@@ -51,7 +51,7 @@ export default async function JobHolder({
     sortBy,
     orderBy
   );
-  console.log(jobs);
+  // console.log(jobs);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
       {jobs.map((job: any) => {

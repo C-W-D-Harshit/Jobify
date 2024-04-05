@@ -58,7 +58,7 @@ export default function JobCard(props: JobCardProps) {
   // Set the background color class to the randomly selected color class
 
   return (
-    <div className="w-full h-80 rounded-xl border p-2 flex flex-col gap-3">
+    <div className="w-full h-80 shadow-xl bg-white rounded-xl border p-2 flex flex-col gap-3">
       <div className={`flex-grow rounded-xl p-3 py-3 ${bgColorClass}`}>
         <div className="flex items-center justify-between">
           <div className="px-2.5 py-1 font-medium text-sm bg-white rounded-full">
@@ -109,7 +109,7 @@ export default function JobCard(props: JobCardProps) {
             {props.job.location}
           </p>
         </div>
-        <Link href={`/job/${props.job.id}`}>
+        <Link href={`/jobs/${props.job.id}`}>
           <Button className="rounded-full">Details</Button>
         </Link>
       </div>

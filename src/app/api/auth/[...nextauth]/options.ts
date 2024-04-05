@@ -45,7 +45,6 @@ export const authOptions = {
               role: true,
               isVerified: true,
               name: true,
-              onboardingComplete: true,
             },
           });
         } catch (error: any) {
@@ -103,7 +102,6 @@ export const authOptions = {
           name: true,
           authProvider: true,
           status: true,
-          onboardingComplete: true,
         },
       });
 
@@ -185,7 +183,6 @@ export const authOptions = {
           role: user?.role,
           verified: user?.isVerified,
           name: user?.name,
-          onboardingComplete: user?.onboardingComplete,
         };
       }
 
@@ -208,7 +205,6 @@ export const authOptions = {
           role: token.role,
           verified: token.verified,
           name: token.name,
-          onboardingComplete: token.onboardingComplete,
         },
       };
     },

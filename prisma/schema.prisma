@@ -30,8 +30,8 @@ model User {
   isVerified           Boolean       @default(false)
   passwordChangedAt    DateTime?
   passwordResetExpires DateTime?
-  passwordResetToken   String?
-  verifyKey            String?
+  passwordResetToken   Int?
+  verifyKey            Int?
   verifyKeyExpires     DateTime?
   phoneNumber          String?       @unique
   role                 Roles         @default(user)
@@ -64,6 +64,7 @@ model Job {
   experience       String?
   company          Company         @relation(fields: [companyId], references: [id])
   companyId        String          @db.Uuid // Changed companyId type to UUID
+  description String?
 
   // Define the relation with SavedJob model
   savedByUsers     SavedJob[]
