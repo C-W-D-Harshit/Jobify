@@ -1,5 +1,8 @@
+// schema.prisma
+
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -7,19 +10,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model product {
+model Product {
   id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   createdAt   DateTime @default(now())
-  updatedAt   DateTime
+  updatedAt   DateTime @updatedAt
   name        String
   description String
   price       Float
 }
 
-model user {
+model User {
   id                   String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   createdAt            DateTime      @default(now())
-  updatedAt            DateTime
+  updatedAt            DateTime     @updatedAt
   name                 String
   email                String        @unique
   password             String
@@ -27,28 +30,88 @@ model user {
   isVerified           Boolean       @default(false)
   passwordChangedAt    DateTime?
   passwordResetExpires DateTime?
-  passwordResetToken   Int?
-  verifyKey            Int?
+  passwordResetToken   String?
+  verifyKey            String?
   verifyKeyExpires     DateTime?
   phoneNumber          String?       @unique
-  role                 roles         @default(user)
-  authProvider         authProviders @default(credentials)
-  status               status        @default(active)
+  role                 Roles         @default(user)
+  authProvider         AuthProviders @default(credentials)
+  status               Status        @default(active)
+
+  // Define the relation with SavedJob model
+  savedJobs SavedJob[]
 }
 
-enum authProviders {
+model Company {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime  @updatedAt
+  name      String
+  jobs      Job[]
+  logo      String?
+}
+
+// Define the Job model
+model Job {
+  id               String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime @updatedAt
+  title            String
+  salary           Int
+  location         String?
+  employmentType   String?
+  workingSchedule  String?
+  experience       String?
+  company          Company         @relation(fields: [companyId], references: [id])
+  companyId        String          @db.Uuid // Changed companyId type to UUID
+
+  // Define the relation with SavedJob model
+  savedByUsers     SavedJob[]
+}
+
+// Define the SavedJob model
+model SavedJob {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime  @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+  job       Job      @relation(fields: [jobId], references: [id])
+
+  // Foreign keys
+  userId    String   @db.Uuid
+  jobId     String   @db.Uuid
+}
+
+// enum EmploymentType {
+//   FULL_TIME
+//   PART_TIME
+//   CONTRACT
+//   INTERNSHIP
+//   PROJECT_WORK
+//   VOLUNTEERING
+// }
+
+// enum WorkingSchedule {
+//   FULL_DAY
+//   FLEXIBLE_SCHEDULE
+//   SHIFT_WORK
+//   DISTANT_WORK
+//   SHIFT_METHOD
+// }
+
+enum AuthProviders {
   google
   credentials
   apple
   facebook
 }
 
-enum roles {
+enum Roles {
   user
   admin
 }
 
-enum status {
+enum Status {
   active
   blocked
 }

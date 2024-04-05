@@ -13,7 +13,7 @@ export default function HomeCard() {
       <Button variant={"secondary"} className="w-full rounded-full">
         Learn More
       </Button>
-      <BackgroundBeams />
+      {/* <BackgroundBeams /> */}
     </div>
   );
 }

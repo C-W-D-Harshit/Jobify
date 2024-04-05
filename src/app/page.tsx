@@ -3,12 +3,21 @@ import SearchComp from "./Search";
 import Sidebar from "./Sidebar";
 import MaxWidthWrapper from "@/components/wrappers/MaxWidthWrapper";
 import SortByComp from "./SortBy";
+import JobCard from "@/components/card/JobCard";
+import JobHolder from "@/components/holders/JobHolder";
+import { Suspense } from "react";
 
-export default function Home() {
+export default function Home({
+  params,
+  searchParams,
+}: {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   return (
     <main>
       <SearchComp />
-      <div className="my-6">
+      <div className="my-8">
         <MaxWidthWrapper>
           <div className="flex gap-6">
             <Sidebar />
@@ -22,6 +31,9 @@ export default function Home() {
                 </div>
                 <SortByComp />
               </div>
+              <Suspense fallback={"loading..."}>
+                <JobHolder searchParams={searchParams} />
+              </Suspense>
             </div>
           </div>
         </MaxWidthWrapper>
