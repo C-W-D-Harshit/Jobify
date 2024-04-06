@@ -63,7 +63,7 @@ export const config = {
     "/account/:path*",
     "/admin/:path*",
     "/checkout/:path*",
-    "/upload-job",
+    "/upload-job/:path*",
     "/jobs/:path*",
     "/applied-jobs/:path*",
     "/saved-jobs/:path*",

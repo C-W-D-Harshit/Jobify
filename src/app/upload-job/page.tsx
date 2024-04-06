@@ -20,6 +20,7 @@ import { createJob } from "@/actions/jobActions";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { set } from "nprogress";
+import { useSession } from "next-auth/react";
 // import Editor from "./Editor";
 const Editor = dynamic(() => import("./Editor"), {
   ssr: false,
@@ -28,6 +29,7 @@ const Editor = dynamic(() => import("./Editor"), {
 const isBrowser = typeof window !== "undefined";
 
 export default function Page() {
+  const { data: session }: { data: any } = useSession();
   const [description, setDescription] = useState("");
   const [workingSchedule, setWorkingSchedule] = useState("");
   const [employmentType, setEmploymentType] = useState("");
@@ -39,6 +41,10 @@ export default function Page() {
   const [companyLogo, setCompanyLogo] = useState("");
 
   const router = useRouter();
+
+  if (!session) {
+    router.push("/")
+  }
 
   const submitHandler = async (e: any) => {
     e.preventDefault();

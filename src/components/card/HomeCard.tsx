@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { BackgroundBeams } from "../ui/background-beams";
 import { Button } from "../ui/button";
 
 export default function HomeCard() {
