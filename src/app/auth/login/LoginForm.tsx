@@ -23,7 +23,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { FaApple, FaFacebookF } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { saveTokenToDB } from "@/actions/onboardingAction";
 
 const formSchema = z.object({
   email: z.string().min(2, {
