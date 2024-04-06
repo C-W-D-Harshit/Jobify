@@ -54,9 +54,7 @@ export async function getJobs(
       orderBy: {
         [sortBy || "createdAt"]: orderBy[sortBy] || "desc",
       },
-      include: {
-        company: true,
-      },
+      include: {},
     });
 
     return jobs;
@@ -71,9 +69,7 @@ export async function getJobById(id: string) {
       where: {
         id,
       },
-      include: {
-        company: true,
-      },
+      include: {},
     });
 
     return job;
@@ -81,3 +77,17 @@ export async function getJobById(id: string) {
     throw new Error(`Error fetching job: ${error.message}`);
   }
 }
+
+export const createJob = async (job: any) => {
+  try {
+    const newJob = await prisma.job.create({
+      data: job,
+    });
+
+    return {
+      success: true,
+    };
+  } catch (error: any) {
+    throw new Error(`Error creating job: ${error.message}`);
+  }
+};

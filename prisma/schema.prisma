@@ -42,14 +42,7 @@ model User {
   savedJobs SavedJob[]
 }
 
-model Company {
-  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  createdAt DateTime @default(now())
-  updatedAt DateTime  @updatedAt
-  name      String
-  jobs      Job[]
-  logo      String?
-}
+
 
 // Define the Job model
 model Job {
@@ -62,8 +55,8 @@ model Job {
   employmentType   String?
   workingSchedule  String?
   experience       String?
-  company          Company         @relation(fields: [companyId], references: [id])
-  companyId        String          @db.Uuid // Changed companyId type to UUID
+  companyName      String?
+  companyLogo      String?
   description String?
 
   // Define the relation with SavedJob model

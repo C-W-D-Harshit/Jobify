@@ -11,7 +11,7 @@ function arrayToString(arr: string[]): string {
   return arr.join(",");
 }
 
-const employmentTypesArray = [
+export const employmentTypesArray = [
   "FULL_TIME",
   "PART_TIME",
   "CONTRACT",
@@ -20,7 +20,7 @@ const employmentTypesArray = [
   "VOLUNTEERING",
 ];
 
-const workingSchedulesArray = [
+export const workingSchedulesArray = [
   "FULL_DAY",
   "FLEXIBLE_SCHEDULE",
   "SHIFT_WORK",

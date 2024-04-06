@@ -17,11 +17,8 @@ type JobCardProps = {
     experience: string;
     location: string;
     createdAt: string;
-    company: {
-      id: string;
-      name: string;
-      // logo: string;
-    };
+    companyName: string;
+    companyLogo: string;
   };
 };
 
@@ -75,14 +72,14 @@ export default function JobCard(props: JobCardProps) {
         <div className="flex items-end justify-between my-3 px-1">
           <div>
             <p className="font-semibold text-sm capitalize">
-              {props.job.company.name}
+              {props.job.companyName}
             </p>
             <p className="text-2xl font-medium capitalize">{props.job.title}</p>
           </div>
           <div className="w-10 h-10 rounded-full relative">
             <Image
-              src={"/assets/amazon.png"}
-              className="rounded-full object-contain"
+              src={props.job.companyLogo ?? "/assets/amazon.png"}
+              className="rounded-full object-cover"
               fill
               alt="Amazon logo"
             />
