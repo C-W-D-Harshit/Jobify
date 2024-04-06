@@ -32,7 +32,7 @@ export default function Header() {
               <h2 className="min-w-max text-2xl font-semibold">Jobify.</h2>
             </Link>
             <Menu />
-            <div className="flex items-center gap-1.5 -mr-5">
+            <div className="lg:flex hidden items-center gap-1.5 -mr-5">
               <MdOutlineLocationOn className="text-neutral-400 text-xl" />
               <p>Noida, UP</p>
             </div>

@@ -26,7 +26,7 @@ const menuItems = [
 
 export default function Menu() {
   return (
-    <div className="flex items-center gap-10 -ml-12 mr-8">
+    <div className="lg:flex hidden items-center gap-10 -ml-12 mr-8">
       {menuItems.map((item, index) => {
         if (item.href === "/") {
           return (

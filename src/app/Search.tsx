@@ -5,7 +5,7 @@ import MaxWidthWrapper from "@/components/wrappers/MaxWidthWrapper";
 import React, { useCallback, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import { IoBagOutline } from "react-icons/io5";
-import { MdOutlineLocationOn } from "react-icons/md";
+import { MdOutlineCurrencyRupee, MdOutlineLocationOn } from "react-icons/md";
 import {
   Select,
   SelectContent,
@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/select";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Input } from "@/components/ui/input";
+import { FaRupeeSign } from "react-icons/fa";
 
 export default function SearchComp() {
   const router = useRouter();
@@ -97,9 +98,9 @@ export default function SearchComp() {
           <Separator orientation="vertical" className="bg-neutral-700 h-16" />
           <div className="flex flex-grow items-center gap-3">
             <div className="w-10 min-w-10 h-10 border border-neutral-700 flex justify-center items-center text-white rounded-full text-xl p-1">
-              <MdOutlineLocationOn />
+              <MdOutlineCurrencyRupee />
             </div>
-            <Select>
+            <Select disabled>
               <SelectTrigger className="w-[120px] text-white bg-primary border-none text-base">
                 <SelectValue placeholder="Per month" />
               </SelectTrigger>
