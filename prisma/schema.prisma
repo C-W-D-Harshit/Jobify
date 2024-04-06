@@ -37,6 +37,7 @@ model User {
   role                 Roles         @default(user)
   authProvider         AuthProviders @default(credentials)
   status               Status        @default(active)
+  jobs                 Job[]
 
   // Define the relation with SavedJob model
   savedJobs SavedJob[]
@@ -58,6 +59,7 @@ model Job {
   companyName      String?
   companyLogo      String?
   description String?
+  users            User[]
 
   // Define the relation with SavedJob model
   savedByUsers     SavedJob[]

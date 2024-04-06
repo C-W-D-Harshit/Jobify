@@ -38,9 +38,15 @@ export function UserAvatar() {
         <DropdownMenuContent>
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>Billing</DropdownMenuItem>
-          <DropdownMenuItem>Team</DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href={"/feature?feature=applied-jobs"}>Applied Jobs</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href={"/feature?feature=saved-jobs"}>Saved Jobs</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href={"/my-jobs"}>My Jobs</Link>
+          </DropdownMenuItem>
           <DropdownMenuItem>
             <Button
               variant={"destructive"}

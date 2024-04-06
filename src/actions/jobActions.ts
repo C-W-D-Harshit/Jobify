@@ -35,11 +35,27 @@ export async function getJobs(
       };
     }
 
+    if (filters.savedByUser) {
+      where.savedByUsers = {
+        some: { id: filters.savedByUser },
+      };
+    }
+
     // Conditionally add employmentType filter
     if (filters.employmentType) {
       where.employmentType = {
         in: filters.employmentType,
       };
+    }
+
+    if (filters.user) {
+      where.users = {
+        some: { id: filters.user },
+      };
+    }
+
+    if (filters.userId) {
+      where.userId = filters.userId;
     }
 
     // Conditionally add workingSchedule filter
@@ -89,5 +105,77 @@ export const createJob = async (job: any) => {
     };
   } catch (error: any) {
     throw new Error(`Error creating job: ${error.message}`);
+  }
+};
+
+export const applyJob = async (jobId: string, userId: string) => {
+  try {
+    // Check if the user has already applied for this job
+    const existingApplication = await prisma.job.findUnique({
+      where: {
+        id: jobId,
+        users: {
+          some: { id: userId },
+        },
+      },
+    });
+
+    if (existingApplication) {
+      throw new Error("You have already applied for this job");
+    }
+
+    // Add the user to the list of users who applied for this job
+    await prisma.job.update({
+      where: { id: jobId },
+      data: { users: { connect: { id: userId } } },
+    });
+
+    // Save the job application details (resume path, cover letter, etc.)
+    // You can save this information in the same job record or in a separate table if needed
+
+    return { success: true };
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error.message,
+    };
+  }
+};
+
+export const saveJob = async (jobId: string, userId: string) => {
+  try {
+    // Check if the job exists
+    const job = await prisma.job.findUnique({ where: { id: jobId } });
+
+    if (!job) {
+      throw new Error("Job not found");
+    }
+
+    // Check if the user has already saved this job
+    const existingSavedJob = await prisma.savedJob.findFirst({
+      where: {
+        jobId,
+        userId,
+      },
+    });
+
+    if (existingSavedJob) {
+      throw new Error("You have already saved this job");
+    }
+
+    // Save the job for the user
+    await prisma.savedJob.create({
+      data: {
+        userId,
+        jobId,
+      },
+    });
+
+    return { success: true };
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error.message,
+    };
   }
 };

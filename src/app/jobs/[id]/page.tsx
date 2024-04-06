@@ -1,6 +1,10 @@
-import { getJobById } from "@/actions/jobActions";
+import { applyJob, getJobById } from "@/actions/jobActions";
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { Button } from "@/components/ui/button";
+import { getServerSession } from "next-auth";
 import React from "react";
+import toast from "react-hot-toast";
+import ApplyComp from "./ApplyComp";
 
 export default async function Page({
   params,
@@ -10,6 +14,7 @@ export default async function Page({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const job = await getJobById(params.id);
+
   return (
     <div className="w-full flex">
       <div className="w-full flex-grow border-r">
@@ -35,7 +40,7 @@ export default async function Page({
         />
       </div>
       <div className="w-64 min-h-[80vh] flex flex-col justify-end items-center px-2 py-6">
-        <Button className="rounded-full">Apply Now</Button>
+        <ApplyComp job={job} />
       </div>
     </div>
   );

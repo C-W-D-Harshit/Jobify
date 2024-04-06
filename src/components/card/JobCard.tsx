@@ -5,6 +5,9 @@ import { Button } from "../ui/button";
 import { MdOutlineBookmarkBorder } from "react-icons/md";
 import Image from "next/image";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { saveJob } from "@/actions/jobActions";
+import toast from "react-hot-toast";
 
 type JobCardProps = {
   job: {
@@ -38,6 +41,7 @@ function formatDateFromDB(dateTimeString: string): string {
 }
 
 export default function JobCard(props: JobCardProps) {
+  const { data: session }: { data: any } = useSession();
   const [bgColorClass, setBgColorClass] = useState("bg-[#ffe1cc]");
 
   useEffect(() => {
@@ -54,6 +58,19 @@ export default function JobCard(props: JobCardProps) {
   }, []);
   // Set the background color class to the randomly selected color class
 
+  const handleSaveJob = async () => {
+    if (!session) {
+      toast.error("Please login to save the job");
+    }
+
+    const result = await saveJob(props.job.id, session?.user?.id);
+    if (result.success) {
+      toast.success("Job saved successfully");
+    } else {
+      toast.error(result.message);
+    }
+  };
+
   return (
     <div className="w-full h-80 shadow-xl bg-white rounded-xl border p-2 flex flex-col gap-3">
       <div className={`flex-grow rounded-xl p-3 py-3 ${bgColorClass}`}>
@@ -64,6 +81,7 @@ export default function JobCard(props: JobCardProps) {
           <Button
             variant={"secondary"}
             size={"icon"}
+            onClick={handleSaveJob}
             className="rounded-full text-xl"
           >
             <MdOutlineBookmarkBorder />
