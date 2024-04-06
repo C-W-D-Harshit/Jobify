@@ -7,13 +7,8 @@ export default function Landing() {
   return (
     <div className="w-full h-full flex flex-col">
       <div className="flex-grow flex flex-col justify-end items-center pb-24">
-        <div className="w-72 h-72 relative">
-          <Image
-            src={"/assets/logo.png"}
-            fill
-            alt="logo"
-            className="object-contain drop-shadow-lg rounded-md"
-          />
+        <div className="w-72 h-72 relative bg-primary flex justify-center items-center rounded-full shadow-xl">
+          <h1 className="text-5xl font-bold text-white">Jobify.</h1>
         </div>
       </div>
       <div className="mb-40">
