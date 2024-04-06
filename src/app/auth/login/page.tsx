@@ -13,7 +13,7 @@ export default function Page({
   const step = searchParams.step ?? "1";
   return (
     <div className="my-6 h-[100dvh]">
-      <MaxWidthWrapper className="h-full">
+      <MaxWidthWrapper className="h-full max-w-screen-lg">
         {step === "1" ? <Landing /> : <LoginForm />}
       </MaxWidthWrapper>
     </div>

@@ -133,7 +133,7 @@ export default function SignUpForm() {
 
   return (
     <div className="py-6">
-      <MaxWidthWrapper>
+      <MaxWidthWrapper className="max-w-screen-lg">
         <div>
           <Link href={"/auth/login?step=1"}>
             <Button
